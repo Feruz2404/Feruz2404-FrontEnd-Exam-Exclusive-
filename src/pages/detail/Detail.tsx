@@ -23,21 +23,19 @@ const Detail = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    setTimeout(() => {
-      fetch(`https://dummyjson.com/products/${id}`)
-        .then((res) => res.json())
-        .then((data) => {
-          setProduct(data);
-          setSelectedImage(data.images[0]);
-          const wishlist = JSON.parse(localStorage.getItem("wishlist") || "[]");
-          setIsInWishlist(wishlist.some((item: Product) => item.id === data.id));
-          setIsLoading(false);
-        })
-        .catch((err) => {
-          console.error("Error fetching product:", err);
-          setIsLoading(false);
-        });
-    }, 1500); // Skeleton loading with delay
+    fetch(`https://dummyjson.com/products/${id}`)
+      .then((res) => res.json())
+      .then((data) => {
+        setProduct(data);
+        setSelectedImage(data.images[0]);
+        const wishlist = JSON.parse(localStorage.getItem("wishlist") || "[]");
+        setIsInWishlist(wishlist.some((item: Product) => item.id === data.id));
+        setIsLoading(false);
+      })
+      .catch((err) => {
+        console.error("Error fetching product:", err);
+        setIsLoading(false);
+      });
   }, [id]);
 
   const handleWishlistToggle = () => {
@@ -59,81 +57,102 @@ const Detail = () => {
     const emptyStars = 5 - fullStars;
     return (
       <>
-        {"★".repeat(fullStars)}{"☆".repeat(emptyStars)}
+        {"★".repeat(fullStars)}
+        {"☆".repeat(emptyStars)}
       </>
     );
   };
 
   if (isLoading) {
-    return (
-      <div className="container mx-auto py-10 px-4 flex flex-col lg:flex-row gap-10 justify-center">
-        {/* Skeleton for images */}
-        <div className="flex flex-col sm:flex-row gap-4 items-center">
-          <div className="flex sm:flex-col gap-6">
-            {[...Array(4)].map((_, index) => (
-              <div key={index} className="w-16 sm:w-28 h-16 sm:h-28 bg-gray-300 rounded-md animate-pulse"></div>
-            ))}
-          </div>
-          <div className="w-72 sm:w-96 h-72 sm:h-96 bg-gray-300 animate-pulse rounded-md"></div>
-        </div>
-
-        {/* Skeleton for product details */}
-        <div className="w-full lg:w-1/2 text-center sm:text-left">
-          <div className="h-8 w-3/4 bg-gray-300 animate-pulse rounded mb-4"></div>
-          <div className="h-6 w-1/2 bg-gray-300 animate-pulse rounded mb-4"></div>
-          <div className="h-6 w-1/4 bg-gray-300 animate-pulse rounded mb-4"></div>
-          <div className="h-24 bg-gray-300 animate-pulse rounded mb-4"></div>
-          <div className="h-12 w-full sm:w-2/3 bg-gray-300 animate-pulse rounded mb-4"></div>
-        </div>
-      </div>
-    );
+    return <div className="text-center py-20">Loading...</div>;
   }
 
   if (!product) {
-    return <p className="text-center py-10">Product not found</p>;
+    return <p className="text-center py-20">Product not found</p>;
   }
 
   return (
-    <div className="container mx-auto py-20 px-4 flex flex-col lg:flex-row gap-10 justify-center">
-      {/* Left side - Images and Gallery */}
-      <div className="flex flex-col sm:flex-row gap-4 items-center">
-        <div className="flex sm:flex-col gap-6">
-          {product.images.map((img) => (
-            <img
-              key={img}
-              src={img}
-              alt="Product Thumbnail"
-              className="w-16 sm:w-28 h-16 sm:h-28 object-cover cursor-pointer border rounded-md transition-transform duration-300 transform hover:scale-110 hover:shadow-lg"
-              onClick={() => setSelectedImage(img)}
-            />
-          ))}
-        </div>
-        <div>
-          <img src={selectedImage} alt="Selected Product" className="w-72 sm:w-96 h-72 sm:h-96 object-contain" />
-        </div>
-      </div>
+    <div className="container mx-auto py-10 px-4">
+      {/* Breadcrumb */}
+      <nav className="text-gray-500 text-sm mb-4">
+        <a href="/" className="hover:underline">Home</a> &gt;{" "}
+        <a href={`/category/${product.category}`} className="hover:underline">{product.category}</a> &gt;{" "}
+        <span className="text-gray-700 font-bold">{product.title}</span>
+      </nav>
 
-      {/* Right side - Product Details */}
-      <div className="w-full lg:w-1/2 text-center sm:text-left">
-        <h1 className="text-2xl sm:text-3xl font-bold">{product.title}</h1>
-        <div className="flex items-center justify-center sm:justify-start mt-2">
-          <span className="text-yellow-500 text-xl sm:text-2xl">{renderRatingStars(product.rating)}</span>
-          <p className="text-gray-600 ml-2">({product.reviews.length} Reviews)</p>
-          <span className="text-green-600 ml-2">{product.stock > 0 ? "In Stock" : "Out of Stock"}</span>
-        </div>
-        <p className="text-red-500 text-2xl font-bold mt-4">${product.price}</p>
-        <p className="text-gray-600 mt-4">{product.description}</p>
-
-        <div className="mt-4 flex flex-col sm:flex-row gap-4 items-center">
-          <div className="flex items-center border rounded-md px-4 py-2">
-            <button className="text-2xl font-bold" onClick={() => setQuantity(quantity > 1 ? quantity - 1 : 1)}>-</button>
-            <span className="px-4 text-2xl">{quantity}</span>
-            <button className="text-2xl font-bold" onClick={() => setQuantity(quantity + 1)}>+</button>
+      <div className="flex flex-col lg:flex-row gap-10">
+        {/* Left side - Images */}
+        <div className="flex flex-col sm:flex-row gap-4">
+          <div className="flex sm:flex-col gap-4">
+            {product.images.map((img) => (
+              <img
+                key={img}
+                src={img}
+                alt="Product Thumbnail"
+                className="w-16 sm:w-20 h-16 sm:h-20 object-cover cursor-pointer border rounded-md hover:scale-105 transition-transform"
+                onClick={() => setSelectedImage(img)}
+              />
+            ))}
           </div>
-          <button className="bg-red-500 text-white px-12 py-3 rounded-md w-full sm:w-auto">Buy Now</button>
-          <button className="border px-4 py-3 rounded-md" onClick={handleWishlistToggle}>
-            {isInWishlist ? <FaHeart className="text-2xl text-red-500" /> : <FaRegHeart className="text-2xl" />}
-          </button>
+          <div className="flex-1">
+            <img
+              src={selectedImage}
+              alt="Selected Product"
+              className="w-full h-96 object-contain border rounded-md"
+            />
+          </div>
+        </div>
+
+        {/* Right side - Product Details */}
+        <div className="flex-1">
+          <h1 className="text-3xl font-bold mb-2">{product.title}</h1>
+          <div className="flex items-center gap-2 text-yellow-500 text-xl">
+            {renderRatingStars(product.rating)}
+            <span className="text-gray-600 text-sm">({product.reviews.length} Reviews)</span>
+          </div>
+          <p className="text-green-600 text-sm">{product.stock > 0 ? "In Stock" : "Out of Stock"}</p>
+          <p className="text-2xl text-red-500 font-bold my-4">${product.price}</p>
+          <p className="text-gray-700 mb-4">{product.description}</p>
+
+          {/* Size and Color Options */}
+          <div className="flex gap-4 mb-4">
+            <div>
+              <p className="font-bold mb-1">Colour:</p>
+              <div className="flex gap-2">
+                <span className="w-6 h-6 bg-red-500 rounded-full cursor-pointer border"></span>
+                <span className="w-6 h-6 bg-blue-500 rounded-full cursor-pointer border"></span>
+              </div>
+            </div>
+            <div>
+              <p className="font-bold mb-1">Size:</p>
+              <select className="border rounded px-2 py-1">
+                <option>XS</option>
+                <option>S</option>
+                <option>M</option>
+                <option>L</option>
+                <option>XL</option>
+              </select>
+            </div>
+          </div>
+
+          {/* Quantity and Buttons */}
+          <div className="flex items-center gap-4 mb-6">
+            <div className="flex items-center border rounded-md px-4 py-2">
+              <button onClick={() => setQuantity(Math.max(1, quantity - 1))} className="text-2xl font-bold">-</button>
+              <span className="px-4 text-2xl">{quantity}</span>
+              <button onClick={() => setQuantity(quantity + 1)} className="text-2xl font-bold">+</button>
+            </div>
+            <button className="bg-red-500 text-white px-6 py-3 rounded-md">Buy Now</button>
+            <button className="border px-4 py-3 rounded-md" onClick={handleWishlistToggle}>
+              {isInWishlist ? <FaHeart className="text-red-500 text-2xl" /> : <FaRegHeart className="text-2xl" />}
+            </button>
+          </div>
+
+          {/* Additional Information */}
+          <div className="border-t pt-4 text-sm text-gray-600">
+            <p>Free Delivery: Enter your postal code for Delivery Availability</p>
+            <p>Return Delivery: Free 30 Days Delivery Returns.</p>
+          </div>
         </div>
       </div>
     </div>

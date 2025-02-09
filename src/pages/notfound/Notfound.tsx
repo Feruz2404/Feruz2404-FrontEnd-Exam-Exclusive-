@@ -3,18 +3,26 @@ import { useNavigate } from "react-router-dom";
 const NotFoundPage = () => {
   const navigate = useNavigate();
 
+  const handleGoHome = () => {
+    navigate("/");
+  };
+
   return (
-    <div className="min-h-screen flex flex-col justify-center items-center bg-gradient-to-r from-white to-indigo-700 text-white">
-      <h1 className="text-8xl font-extrabold mb-6">404</h1>
-      <p className="text-xl text-center mb-10 max-w-md mx-auto">
-        Oops! The page you're looking for doesn't exist. You may have mistyped the URL or the page might have been removed.
-      </p>
-      <button
-        onClick={() => navigate("/")}
-        className="px-8 py-4 text-lg bg-yellow-500 text-gray-900 rounded-lg shadow-lg hover:bg-yellow-600 transition duration-300 transform hover:scale-105"
-      >
-        Go to Homepage
-      </button>
+    <div className="min-h-screen flex flex-col items-center justify-center bg-white text-black">
+      <div className="w-full max-w-4xl mx-auto px-6 py-16">
+        <div className="text-center">
+          <h1 className="text-6xl font-bold mb-4">404 Not Found</h1>
+          <p className="text-lg text-gray-600 mb-10">
+            Your visited page not found. You may go home page.
+          </p>
+          <button
+            onClick={handleGoHome}
+            className="px-8 py-4 bg-red-500 text-white text-base rounded-md hover:bg-red-600 transition focus:outline-none focus:ring-2 focus:ring-red-300"
+          >
+            Back to home page
+          </button>
+        </div>
+      </div>
     </div>
   );
 };
