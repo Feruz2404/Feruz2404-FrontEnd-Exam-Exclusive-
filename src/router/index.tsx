@@ -4,7 +4,7 @@ import { useRoutes } from "react-router-dom";
 const Home = lazy(() => import("../pages/home/Home"));
 const Abouts = lazy(() => import("../pages/about/Abouts"));
 const NotFound = lazy(() => import("../pages/notfound/Notfound"));
-const SignIn = lazy(() => import("../pages/signin/SignIn"));
+const Profile = lazy(() => import("../pages/profile/Profile"));
 const SignUp_User = lazy(() => import("../pages/signup/SignUp_User"));
 const Cart = lazy(() => import("../pages/cart/Carts"));
 const Wishlist = lazy(() => import("../pages/wishlist/Wishlits"));
@@ -58,10 +58,10 @@ const Routers = () => {
               ),
             },
             {
-              path: "/signin",
+              path: "/profile",
               element: (
                 <SuspenseContainer>
-                  <SignIn />
+                  <Profile />
                 </SuspenseContainer>
               ),
             },

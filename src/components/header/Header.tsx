@@ -16,7 +16,6 @@ const Header: React.FC = () => {
 
   return (
     <header className="w-full border-b sticky top-0 z-50 bg-white shadow-md">
-      {/* Top Bar */}
       <div className="w-full bg-black text-white text-center py-2 text-xs sm:text-sm">
         Summer Sale For All Swim Suits & Free Express Delivery -
         <span className="font-bold"> 50% OFF! </span>
@@ -40,7 +39,7 @@ const Header: React.FC = () => {
             <IoCartOutline className="text-3xl hover:text-red-600 transition" />
           </NavLink>
 
-          <NavLink to="/signin">
+          <NavLink to="/profile">
             <FaRegUser className="text-2xl hover:text-red-600 transition" />
           </NavLink>
 
@@ -113,7 +112,7 @@ const Header: React.FC = () => {
             <IoCartOutline className="text-3xl hover:text-red-600 transition" />
           </NavLink>
 
-          <NavLink to="/signin">
+          <NavLink to="/profile">
             <FaRegUser className="text-2xl hover:text-red-600 transition" />
           </NavLink>
         </div>

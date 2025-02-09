@@ -10,11 +10,6 @@ import googlePlay from "../../assets/images/google_play.svg";
 import appStore from "../../assets/images/app_store.svg";
 
 const Footer = () => {
-  // const navigate = useNavigate();
-  // const handleNavigation = useCallback((path: string) => {
-  //   navigate(path);
-  // }, [navigate]);
-
   const socialLinks = [
     { icon: FaFacebookF, href: "https://www.facebook.com/" },
     { icon: PiXLogoLight, href: "https://x.com/" },
@@ -59,7 +54,7 @@ const Footer = () => {
 
         {/* Account Section */}
         <FooterSection title="Account">
-          <FooterLinkItem to="/signin">My Account</FooterLinkItem>
+          <FooterLinkItem to="/profile">My Account</FooterLinkItem>
           <FooterLinkItem to="/login">Login / Register</FooterLinkItem>
           <FooterLinkItem to="/cart">Cart</FooterLinkItem>
           <FooterLinkItem to="/wishlist">Wishlist</FooterLinkItem>
