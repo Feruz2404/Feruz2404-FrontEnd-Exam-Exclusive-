@@ -9,7 +9,10 @@ export default {
       primary: "#000000",
       secondary: "#ffffff",
     },
-    fontFamily: {},
+    fontFamily: {
+      poppins: ["Poppins"],
+      inter: ["Inter"],
+    },
     container: {
       center: true,
       screens: {
@@ -19,7 +22,6 @@ export default {
         xl: "1040px",
         "2xl": "1308px",
       },
-      padding: "1rem",
     },
   },
   darkMode: "class",
