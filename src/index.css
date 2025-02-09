@@ -1,0 +1,17 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: "Poppins";
+  src: url("./assets/fonts/poppins/Poppins-Light.ttf") format("truetype");
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Inter";
+  src: url("./assets/fonts/inter/static/Inter_18pt-Medium.ttf")
+    format("truetype");
+  font-weight: 500;
+  font-style: normal;
+}
