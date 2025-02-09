@@ -18,7 +18,7 @@ const Header: React.FC = () => {
     <header className="w-full border-b sticky top-0 z-50 bg-white shadow-md">
       {/* Top Bar */}
       <div className="w-full bg-black text-white text-center py-2 text-xs sm:text-sm">
-        Summer Sale For All Swim Suits & Free Express Delivery - 
+        Summer Sale For All Swim Suits & Free Express Delivery -
         <span className="font-bold"> 50% OFF! </span>
         <span className="font-semibold cursor-pointer underline ml-1">Shop Now</span>
       </div>
@@ -30,13 +30,28 @@ const Header: React.FC = () => {
           Exclusive
         </h1>
 
-        {/* Hamburger menu (faqat mobil uchun) */}
-        <div className="md:hidden">
-          {menuOpen ? (
-            <FiX className="text-3xl cursor-pointer" onClick={() => setMenuOpen(false)} />
-          ) : (
-            <FiMenu className="text-3xl cursor-pointer" onClick={() => setMenuOpen(true)} />
-          )}
+        {/* Mobile Icons & Hamburger Menu */}
+        <div className="md:hidden flex items-center gap-4 ml-auto"> {/* Added ml-auto */}
+          <NavLink to="/wishlist">
+            <FaRegHeart className="text-2xl hover:text-red-600 transition" />
+          </NavLink>
+
+          <NavLink to="/cart">
+            <IoCartOutline className="text-3xl hover:text-red-600 transition" />
+          </NavLink>
+
+          <NavLink to="/signin">
+            <FaRegUser className="text-2xl hover:text-red-600 transition" />
+          </NavLink>
+
+          {/* Hamburger menu (faqat mobil uchun) */}
+          <div className="ml-4"> {/* Added ml-4 for spacing */}
+            {menuOpen ? (
+              <FiX className="text-3xl cursor-pointer" onClick={() => setMenuOpen(false)} />
+            ) : (
+              <FiMenu className="text-3xl cursor-pointer" onClick={() => setMenuOpen(true)} />
+            )}
+          </div>
         </div>
 
         {/* Menu (Desktop uchun) */}
@@ -65,7 +80,7 @@ const Header: React.FC = () => {
           ))}
         </ul>
 
-        {/* Icons & Search */}
+        {/* Icons & Search (Desktop) */}
         <div className="hidden md:flex items-center gap-4">
           <div className="relative">
             <input
@@ -105,59 +120,42 @@ const Header: React.FC = () => {
       </nav>
 
       {/* Mobile Menu (Framer Motion bilan) */}
-      {/* Mobile Menu (Framer Motion bilan) */}
-<AnimatePresence>
-  {menuOpen && (
-    <motion.ul
-      initial={{ opacity: 0, y: -20 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: -20 }}
-      transition={{ duration: 0.3, ease: "easeOut" }}
-      className="md:hidden flex flex-col gap-4 text-lg text-center py-4 bg-gray-100 shadow-lg absolute top-full left-0 w-full z-50"
-    >
-      <li>
-        <NavLink
-          to="/"
-          className={({ isActive }) =>
-            isActive ? "text-black font-semibold" : "hover:text-black"
-          }
-          onClick={() => setMenuOpen(false)}
-        >
-          Home
-        </NavLink>
-      </li>
-      {["Contact", "About", "SignUp"].map((item) => (
-        <li key={item}>
-          <NavLink
-            to={`/${item.toLowerCase()}`}
-            className={({ isActive }) =>
-              isActive ? "text-black font-semibold" : "hover:text-black"
-            }
-            onClick={() => setMenuOpen(false)}
+      <AnimatePresence>
+        {menuOpen && (
+          <motion.ul
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.3, ease: "easeOut" }}
+            className="md:hidden flex flex-col gap-4 text-lg text-center py-4 bg-gray-100 shadow-lg absolute top-full left-0 w-full z-50"
           >
-            {item}
-          </NavLink>
-        </li>
-      ))}
-
-      {/* Mobil versiyada ikonlar */}
-      <div className="flex justify-center gap-6 py-2">
-        <NavLink to="/wishlist" onClick={() => setMenuOpen(false)}>
-          <FaRegHeart className="text-2xl hover:text-red-500 transition" />
-        </NavLink>
-
-        <NavLink to="/cart" onClick={() => setMenuOpen(false)}>
-          <IoCartOutline className="text-3xl hover:text-gray-600 transition" />
-        </NavLink>
-
-        <NavLink to="/signin" onClick={() => setMenuOpen(false)}>
-          <FaRegUser className="text-2xl hover:text-gray-600 transition" />
-        </NavLink>
-      </div>
-    </motion.ul>
-  )}
-</AnimatePresence>
-
+            <li>
+              <NavLink
+                to="/"
+                className={({ isActive }) =>
+                  isActive ? "text-black font-semibold" : "hover:text-black"
+                }
+                onClick={() => setMenuOpen(false)}
+              >
+                Home
+              </NavLink>
+            </li>
+            {["Contact", "About", "SignUp"].map((item) => (
+              <li key={item}>
+                <NavLink
+                  to={`/${item.toLowerCase()}`}
+                  className={({ isActive }) =>
+                    isActive ? "text-black font-semibold" : "hover:text-black"
+                  }
+                  onClick={() => setMenuOpen(false)}
+                >
+                  {item}
+                </NavLink>
+              </li>
+            ))}
+          </motion.ul>
+        )}
+      </AnimatePresence>
     </header>
   );
 };
