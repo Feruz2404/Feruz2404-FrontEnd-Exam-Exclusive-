@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-const Detail = () => {
-  return <div>Detail</div>;
-=======
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { FaRegHeart, FaHeart } from "react-icons/fa";
@@ -142,7 +138,6 @@ const Detail = () => {
       </div>
     </div>
   );
->>>>>>> master
 };
 
 export default Detail;
