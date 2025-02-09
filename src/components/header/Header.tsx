@@ -1,18 +1,9 @@
-<<<<<<< HEAD
-const Header = () => {
-  return (
-    <div>Header</div>
-  )
-}
-
-export default Header
-=======
 import { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { FaRegHeart, FaRegUser } from "react-icons/fa";
 import { IoCartOutline } from "react-icons/io5";
 import { FiMenu, FiX } from "react-icons/fi";
-import { motion, AnimatePresence } from "framer-motion"; // Animatsiya uchun
+import { motion, AnimatePresence } from "framer-motion";
 
 const Header: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -172,4 +163,3 @@ const Header: React.FC = () => {
 };
 
 export default Header;
->>>>>>> master
