@@ -68,9 +68,8 @@ const Footer = () => {
           <FooterLinkItem to="/faq">FAQ</FooterLinkItem>
           <FooterLinkItem to="/contact">Contact</FooterLinkItem>
           <FooterLinkItem to="/about">About</FooterLinkItem>
-
         </FooterSection>
-
+        
         {/* Download App Section */}
         <div>
           <h3 className="text-xl font-medium mb-4">Download App</h3>

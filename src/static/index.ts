@@ -3,5 +3,5 @@ export const links = [
   { title: "Contact", path: "/contact" },
   { title: "Profile", path: "/profile" },
   { title: "About", path: "/about" },
-  { title: "Signp", path: "/signup" }
+  { title: "SignUp", path: "/signup" }
 ];
